@@ -7,3 +7,6 @@ class BasePage:
     def __init__(self, driver: webdriver.Chrome):
         self.driver = driver
         self.wait = WebDriverWait(self.driver, 10)
+
+    def find_element(self,(type, value)):
+        return self.wait.until(EC.presence_of_element_located((By.type, value)))
