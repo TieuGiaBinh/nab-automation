@@ -13,3 +13,5 @@ def test_log_in(username, password):
     login_page.click_login()
     log_in_page.wait_for_page_load()
     assert log_in_page.get_current_url() == "https://www.saucedemo.com/inventory.html", f"Login failed for user: {username}"
+    sleep(5)
+    log_in_page.quit()
