@@ -1,0 +1,16 @@
+# Testing framework
+pytest
+pytest-html
+pytest-xdist
+
+# Selenium for browser automation
+selenium
+
+# WebDriver manager to auto-download ChromeDriver
+webdriver-manager
+
+# Linting / code style checker
+flake8
+
+# Optional: to manage environment variables
+python-dotenv
