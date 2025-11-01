@@ -42,7 +42,7 @@ jobs:
           CI: true
         run: |
           mkdir -p test-reports
-          pytest --junitxml=test-reports/results.xml tests/
+          pytest -v --html=test-reports/report.html --self-contained-html tests/
 
       - name: Upload Test Results
         if: always()
