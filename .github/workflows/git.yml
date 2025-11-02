@@ -47,7 +47,7 @@ jobs:
           CI: true
         run: |
           mkdir -p test-reports
-          pytest -v ${{inputs.test_path}} --html=test-reports/report.html --self-contained-html tests/
+          pytest -v ${{inputs.test_path}} --html=test-reports/report.html --self-contained-html
 
       - name: Upload Test Results
         if: always()
