@@ -1,12 +1,6 @@
 name: CI - Selenium Tests
 
 on:
-  push:
-    branches:
-      - develop
-  pull_request:
-    branches:
-      - develop
   workflow_dispatch:
     inputs:
       test_path:
@@ -47,7 +41,7 @@ jobs:
           CI: true
         run: |
           mkdir -p test-reports
-          pytest -v ${{inputs.test_path}} --html=test-reports/report.html --self-contained-html
+          pytest -v "${{ inputs.test_path }}" --html=test-reports/report.html --self-contained-html
 
       - name: Upload Test Results
         if: always()
