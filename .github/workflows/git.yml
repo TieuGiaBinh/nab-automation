@@ -1,12 +1,13 @@
 name: CI - Selenium Tests
 
 on:
-  workflow_dispatch:
-    inputs:
-      test_path:
-        description: 'Nhập đường dẫn test case hoặc marker muốn chạy (VD: tests/test_login.py hoặc -m smoke hoặc tests/test_dashboard.py::test_dashboard_elements)'
-        required: true
-        default: 'tests/'
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - develop
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -30,19 +31,16 @@ jobs:
           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
-
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-
       - name: Run Selenium tests
         env:
           CI: true
         run: |
           mkdir -p test-reports
-          pytest -v "${{ inputs.test_path }}" --html=test-reports/report.html --self-contained-html
-
+          pytest -v --html=test-reports/report.html --self-contained-html tests/
       - name: Upload Test Results
         if: always()
         uses: actions/upload-artifact@v4
