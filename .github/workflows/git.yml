@@ -7,7 +7,12 @@ on:
   pull_request:
     branches:
       - develop
-
+  workflow_dispatch:
+    inputs:
+      test_path:
+        description: 'Nhập đường dẫn test case hoặc marker muốn chạy (VD: tests/test_login.py hoặc -m smoke hoặc tests/test_dashboard.py::test_dashboard_elements)'
+        required: true
+        default: 'tests/'
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -42,7 +47,7 @@ jobs:
           CI: true
         run: |
           mkdir -p test-reports
-          pytest -v --html=test-reports/report.html --self-contained-html tests/
+          pytest -v ${{inputs.test_path}} --html=test-reports/report.html --self-contained-html tests/
 
       - name: Upload Test Results
         if: always()
