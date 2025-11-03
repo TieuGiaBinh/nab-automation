@@ -11,10 +11,8 @@ class BasePage:
         self.driver = webdriver.Chrome(options=options)
         self.wait = WebDriverWait(self.driver, 10)
 
-    def find_element(self, locator: tuple):
-        _type, value = locator
-        by_type = getattr(By, _type)   # dùng getattr để truy cập thuộc tính động
-        return self.wait.until(EC.presence_of_element_located((by_type, value)))
+    def find_element(self, *locator):
+        return self.wait.until(EC.presence_of_element_located(locator))
 
     def quit(self):
         self.driver.quit()

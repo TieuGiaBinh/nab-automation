@@ -1,11 +1,12 @@
 from pages.base_page import BasePage
+from selenium.webdriver.common.by import By
 
 class LogInPage(BasePage):
-    USERNAME = ('ID', 'user-name')
-    PASSWORD = ('ID', 'password')
-    LOGIN_BUTTON = ('ID', 'login-button')
+    USERNAME = (By.ID, 'user-name')
+    PASSWORD = (By.ID, 'password')
+    LOGIN_BUTTON = (By.ID, 'login-button')
     URL = 'https://www.saucedemo.com/'
-    CART_ICON = ('CSS_SELECTOR', '#shopping_cart_container > a')
+    CART_ICON = (By.CSS_SELECTOR, '#shopping_cart_container > a')
 
     def enter_username(self, username: str):
         self.find_element(self.USERNAME).send_keys(username)
